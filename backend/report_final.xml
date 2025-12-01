@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="3" time="0.107" timestamp="2025-11-27T19:12:38.257701+05:30" hostname="DESKTOP-2TR560G"><testcase classname="app.tests.test_encryption" name="test_encryption_roundtrip" time="0.001"><failure message="ValueError: ENCRYPTION_KEY must be 32 bytes, got 48">def test_encryption_roundtrip():
+        plaintext = "super_secret_password"
+&gt;       ciphertext, nonce = encrypt(plaintext)
+                            ^^^^^^^^^^^^^^^^^^
+
+app\tests\test_encryption.py:10: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+plaintext = 'super_secret_password'
+
+    def encrypt(plaintext: str) -&gt; tuple[bytes, bytes]:
+        """
+        Encrypts plaintext using AES-256-GCM.
+        Returns (ciphertext, nonce).
+        """
+        key = get_key()
+        if len(key) != 32:
+&gt;           raise ValueError(f"ENCRYPTION_KEY must be 32 bytes, got {len(key)}")
+E           ValueError: ENCRYPTION_KEY must be 32 bytes, got 48
+
+app\lib\encryption.py:31: ValueError</failure></testcase><testcase classname="app.tests.test_encryption" name="test_encryption_randomness" time="0.001"><failure message="ValueError: ENCRYPTION_KEY must be 32 bytes, got 48">def test_encryption_randomness():
+        plaintext = "same_password"
+&gt;       c1, n1 = encrypt(plaintext)
+                 ^^^^^^^^^^^^^^^^^^
+
+app\tests\test_encryption.py:19: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+plaintext = 'same_password'
+
+    def encrypt(plaintext: str) -&gt; tuple[bytes, bytes]:
+        """
+        Encrypts plaintext using AES-256-GCM.
+        Returns (ciphertext, nonce).
+        """
+        key = get_key()
+        if len(key) != 32:
+&gt;           raise ValueError(f"ENCRYPTION_KEY must be 32 bytes, got {len(key)}")
+E           ValueError: ENCRYPTION_KEY must be 32 bytes, got 48
+
+app\lib\encryption.py:31: ValueError</failure></testcase><testcase classname="app.tests.test_encryption" name="test_invalid_key_length" time="0.001" /></testsuite></testsuites>

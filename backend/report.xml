@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="2" failures="0" skipped="0" tests="2" time="0.193" timestamp="2025-11-27T19:11:40.680573+05:30" hostname="DESKTOP-2TR560G"><testcase classname="" name="app.tests.test_encryption" time="0.000"><error message="collection failure">ImportError while importing test module 'C:\Users\chait\OneDrive\Desktop\secret superstore\secret-superstore\backend\app\tests\test_encryption.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\chait\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app\tests\test_encryption.py:3: in &lt;module&gt;
+    from ..lib.encryption import encrypt, decrypt
+E   ImportError: attempted relative import with no known parent package</error></testcase><testcase classname="" name="test_output.txt" time="0.000"><error message="collection failure">C:\Users\chait\AppData\Local\Programs\Python\Python311\Lib\pathlib.py:1059: in read_text
+    return f.read()
+           ^^^^^^^^
+&lt;frozen codecs&gt;:322: in decode
+    ???
+E   UnicodeDecodeError: 'utf-8' codec can't decode byte 0xff in position 0: invalid start byte</error></testcase></testsuite></testsuites>

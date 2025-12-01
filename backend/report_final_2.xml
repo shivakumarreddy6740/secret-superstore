@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="3" time="0.119" timestamp="2025-11-27T19:13:13.610666+05:30" hostname="DESKTOP-2TR560G"><testcase classname="app.tests.test_encryption" name="test_encryption_roundtrip" time="0.003" /><testcase classname="app.tests.test_encryption" name="test_encryption_randomness" time="0.000" /><testcase classname="app.tests.test_encryption" name="test_invalid_key_length" time="0.001"><failure message="AssertionError: Regex pattern did not match.&#10;  Expected regex: 'ENCRYPTION_KEY must be 32 bytes'&#10;  Actual message: 'ENCRYPTION_KEY must be a valid base64 or hex string'">def test_invalid_key_length():
+        original_key = os.environ["ENCRYPTION_KEY"]
+        os.environ["ENCRYPTION_KEY"] = "short_key"
+    
+        try:
+            with pytest.raises(ValueError, match="ENCRYPTION_KEY must be 32 bytes"):
+&gt;               encrypt("test")
+
+app\tests\test_encryption.py:33: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+app\lib\encryption.py:33: in encrypt
+    key = get_key()
+          ^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def get_key() -&gt; bytes:
+        key_str = os.getenv("ENCRYPTION_KEY")
+        if not key_str:
+            raise ValueError("ENCRYPTION_KEY environment variable is not set")
+    
+        # Try decoding from base64
+        try:
+            decoded = base64.b64decode(key_str)
+            if len(decoded) == 32:
+                return decoded
+        except Exception:
+            pass
+    
+        # Try decoding from hex
+        try:
+            decoded = bytes.fromhex(key_str)
+            if len(decoded) == 32:
+                return decoded
+        except Exception:
+            pass
+    
+&gt;       raise ValueError("ENCRYPTION_KEY must be a valid base64 or hex string")
+E       ValueError: ENCRYPTION_KEY must be a valid base64 or hex string
+
+app\lib\encryption.py:26: ValueError
+
+During handling of the above exception, another exception occurred:
+
+    def test_invalid_key_length():
+        original_key = os.environ["ENCRYPTION_KEY"]
+        os.environ["ENCRYPTION_KEY"] = "short_key"
+    
+        try:
+&gt;           with pytest.raises(ValueError, match="ENCRYPTION_KEY must be 32 bytes"):
+E           AssertionError: Regex pattern did not match.
+E             Expected regex: 'ENCRYPTION_KEY must be 32 bytes'
+E             Actual message: 'ENCRYPTION_KEY must be a valid base64 or hex string'
+
+app\tests\test_encryption.py:32: AssertionError</failure></testcase></testsuite></testsuites>
